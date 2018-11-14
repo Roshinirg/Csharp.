@@ -4,70 +4,103 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _14NOV
+namespace _14nov2018
 {
     class CommonDetails
     {
-        string name;
         int Id;
+         public string Name;
+        
 
-        public CommonDetails()
+        public string _name             // Encapsulation(Getter and Setter)
         {
-            Console.WriteLine("THIS IS ZERO PARAMETER CONSTRUCTOR");
-            name = "ABC";
-            Id = 100;
-           
+            get
+            {
+                return  Name;
+                    
+            }
+            set
+            {
+                Name = value;
+            }
+
         }
 
-        public CommonDetails(string name)
+        public CommonDetails()              // constructor
         {
-            this.name = name;
-        }
+            Console.WriteLine("this is first constructor");
 
-        public CommonDetails(int Id)
+        }
+        public CommonDetails(int Id, string Name)           // Constructor Overloading
         {
             this.Id = Id;
+            this.Name = Name;
+            Console.WriteLine(this.Id);
+            Console.WriteLine(this.Name);
+          
         }
-        
-
-        
+        public CommonDetails(int Id)
+        {
+            Console.WriteLine("this is third constructor");
+        }
     }
-    class player : CommonDetails
+    
+    class Course 
     {
-        int score;
-
-        public player()
-        {
-
-            Console.WriteLine("THIS IS PLAYER CLASS CONSTRUCTOR");
-           
-            
-        }
-
-        public player(string nm) : base ( nm)
-        {
-            Console.WriteLine("name is:"+nm);
-            
-        }
-        public player(int Id) : base (Id)
-        {
-            Console.WriteLine("player's id is"+Id);
-        }
+        public int fees;
         
-        
-       
+        public virtual void GetCourseDetails()              // Method overriding
+        {
+            Console.WriteLine("Enter the course Fee");
+            fees = Convert.ToInt16(Console.ReadLine());
+        }
+
+        public virtual void DisplayCourseDetails()
+        {
+            Console.WriteLine("Course Fee is : " + fees);
+        }
     }
-    class Program
+
+    class JavaCourse : Course
+    {
+        int Duration;
+
+        public override void GetCourseDetails()
+        {
+            Console.WriteLine("Enter the course Fee");
+            fees = Convert.ToInt16(Console.ReadLine());
+
+            Console.WriteLine("Enter the course Duraton");
+            Duration = Convert.ToInt16(Console.ReadLine());
+        }
+
+        public override void DisplayCourseDetails()
+        {
+            Console.WriteLine("Display the Java Course Details");
+            Console.WriteLine("Fees : " + fees + ", Duration " + Duration);
+        }
+    }
+
+    public class launch
     {
         static void Main(string[] args)
+
         {
-            player p = new player();
-            player p1 = new player("virat");
-            player p2 = new player(2);
+            CommonDetails CD = new CommonDetails();
+            CD._name = "roshini";
+            Console.WriteLine(CD._name);
 
+            CommonDetails C = new CommonDetails(1,"manasa");
+
+            Course c = new Course();
+            c.GetCourseDetails();
+            c.DisplayCourseDetails();
+
+            JavaCourse jc = new JavaCourse();
+            jc.GetCourseDetails();
+            jc.DisplayCourseDetails();
             
-            Console.ReadLine();
-
+            Console.ReadKey();
         }
-    }
+    }    
 }
